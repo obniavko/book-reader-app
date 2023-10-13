@@ -5,7 +5,7 @@ RSpec.describe "books/show", type: :view do
     assign(:book, Book.create!(
       title: "Title",
       author: "Author",
-      isbn: "Isbn",
+      isbn: "978-3-16-148410-0",
       description: "MyText"
     ))
   end
@@ -14,7 +14,7 @@ RSpec.describe "books/show", type: :view do
     render
     expect(rendered).to match(/Title/)
     expect(rendered).to match(/Author/)
-    expect(rendered).to match(/Isbn/)
+    expect(rendered).to match(/978-3-16-148410-0/)
     expect(rendered).to match(/MyText/)
   end
 end

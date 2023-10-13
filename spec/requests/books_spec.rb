@@ -13,17 +13,23 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/books", type: :request do
-  
+
   # This should return the minimal set of attributes required to create a valid
   # Book. As you add validations to Book, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:valid_attributes) {{
+    title: "MyString",
+    author: "MyString",
+    isbn: "978-3-16-148410-0",
+    description: "MyText"
+  }}
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:invalid_attributes) {{
+    title: "",
+    author: "",
+    isbn: "abc!3-16_14410.0",
+    description: ""
+  }}
 
   describe "GET /index" do
     it "renders a successful response" do
@@ -77,26 +83,31 @@ RSpec.describe "/books", type: :request do
         }.to change(Book, :count).by(0)
       end
 
-    
+
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post books_url, params: { book: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      let(:new_attributes) {{
+        title: "NewString",
+        author: "NewString",
+        isbn: "978-3-16-148410-1",
+        description: "NewText"
+      }}
 
       it "updates the requested book" do
         book = Book.create! valid_attributes
         patch book_url(book), params: { book: new_attributes }
         book.reload
-        skip("Add assertions for updated state")
+        new_attributes.each_pair do |key, value|
+          expect(book[key]).to eq(value)
+        end
       end
 
       it "redirects to the book" do
@@ -108,13 +119,13 @@ RSpec.describe "/books", type: :request do
     end
 
     context "with invalid parameters" do
-    
+
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         book = Book.create! valid_attributes
         patch book_url(book), params: { book: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 

@@ -5,7 +5,7 @@ RSpec.describe "books/edit", type: :view do
     Book.create!(
       title: "MyString",
       author: "MyString",
-      isbn: "MyString",
+      isbn: "978-3-16-148410-0",
       description: "MyText"
     )
   }
