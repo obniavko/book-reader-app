@@ -27,6 +27,10 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+gem "tailwindcss-rails", "~> 2.0"
+
+gem "rspec-rails"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -64,7 +68,6 @@ group :development do
   # gem "spring"
 end
 
-
-gem "tailwindcss-rails", "~> 2.0"
-
-gem "rspec-rails"
+group :test do
+  gem 'shoulda-matchers', '~> 5.0'
+end
