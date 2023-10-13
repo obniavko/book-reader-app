@@ -1,8 +1,7 @@
 class Book < ApplicationRecord
-  validates :title, :author, :description, presence: true
-  validates :title, length: { maximum: 150 }
-  validates :description, length: { maximum: 1000 }
-  validates :isbn, uniqueness: true
-  validates :isbn, format: { with: /\A[\d-]*\z/,
+  validates :title, presence: true, length: { maximum: 150 }
+  validates :author, presence: true
+  validates :isbn, uniqueness: true, format: { with: /\A[\d-]*\z/,
     message: "only allows numbers and dashes" }
+  validates :description, presence: true, length: { maximum: 1000 }
 end
