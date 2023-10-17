@@ -1,12 +1,3 @@
-require "faker"
+require 'factory_bot_rails'
 
-20.times do
-  book = Book.new(
-  title: Faker::Book.title,
-  author: Faker::Book.author,
-  isbn: Faker::Code.isbn(base: 13),
-  description: "#{Faker::Book.genre}, #{Faker::Book.publisher}"
-  )
-
-  book.save
-end
+FactoryBot.create_list(:book, 10)
