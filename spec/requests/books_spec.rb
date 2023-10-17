@@ -1,19 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe "/books", type: :request do
-  let(:valid_attributes) {{
-    title: "MyString",
-    author: "MyString",
-    isbn: "978-3-16-148410-0",
-    description: "MyText"
-  }}
+RSpec.describe BooksController, type: :request do
+  let(:valid_attributes) { attributes_for(:book) }
+  let(:invalid_attributes) { { title: '' } }
+  let(:new_attributes) { { title: 'NewTitle' } }
 
-  let(:invalid_attributes) {{
-    title: "",
-    author: "",
-    isbn: "abc!3-16_14410.0",
-    description: ""
-  }}
 
   let(:new_attributes) {{
     title: "NewString",
@@ -22,7 +13,7 @@ RSpec.describe "/books", type: :request do
     description: "NewText"
   }}
 
-  describe "GET /index" do
+  describe "GET #index" do
     it "renders a successful response" do
       Book.create! valid_attributes
       get books_url
@@ -31,7 +22,7 @@ RSpec.describe "/books", type: :request do
     end
   end
 
-  describe "GET /show" do
+  describe "GET #show" do
     it "renders a successful response" do
       book = Book.create! valid_attributes
       get book_url(book)
@@ -40,7 +31,7 @@ RSpec.describe "/books", type: :request do
     end
   end
 
-  describe "GET /new" do
+  describe "GET #new" do
     it "renders a successful response" do
       get new_book_url
 
@@ -48,7 +39,7 @@ RSpec.describe "/books", type: :request do
     end
   end
 
-  describe "GET /edit" do
+  describe "GET #edit" do
     it "renders a successful response" do
       book = Book.create! valid_attributes
       get edit_book_url(book)
@@ -57,7 +48,7 @@ RSpec.describe "/books", type: :request do
     end
   end
 
-  describe "POST /create" do
+  describe "POST #create" do
     context "with valid parameters" do
       it "creates a new Book and redirects to it" do
         expect {
@@ -79,7 +70,7 @@ RSpec.describe "/books", type: :request do
     end
   end
 
-  describe "PATCH /update" do
+  describe "PATCH #update" do
     context "with valid parameters" do
 
       it "updates the requested book and redirects to it" do
@@ -106,7 +97,7 @@ RSpec.describe "/books", type: :request do
     end
   end
 
-  describe "DELETE /destroy" do
+  describe "DELETE #destroy" do
     it "destroys the requested book and redirects to the books list" do
       book = Book.create! valid_attributes
 
