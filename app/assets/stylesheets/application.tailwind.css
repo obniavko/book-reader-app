@@ -2,12 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
+input[type=file]::-webkit-file-upload-button,
+input[type=file]::file-selector-button {
+   @apply text-white bg-indigo-600 hover:bg-indigo-700 font-medium text-sm cursor-pointer border-0 py-2.5 pl-8 pr-4;
+   margin-inline-start: -1rem;
+   margin-inline-end: 1rem;
+}
+
+abbr[title=required] {
+  @apply !text-red-500 no-underline;
+}
 
 @layer components {
   .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+    @apply text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2;
   }
 }
-
-*/

@@ -19,9 +19,7 @@
     <%= book.description %>
   </p>
 
-  <% if action_name != "show" %>
-    <%= link_to "Show this book", book, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to "Edit this book", edit_book_path(book), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Show this book", book, class: "btn btn-primary" %>
+    <%= link_to "Edit this book", edit_book_path(book), class: "btn btn-primary" %>
     <hr class="mt-6">
-  <% end %>
 </div>
