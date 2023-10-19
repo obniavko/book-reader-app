@@ -1,10 +1,10 @@
 class BooksController < ApplicationController
   def index
-    @books = Book.order(:id)
+    @books = collection
   end
 
   def show
-    @book = Book.find(params[:id])
+    @book = resource
   end
 
   def new
@@ -12,7 +12,7 @@ class BooksController < ApplicationController
   end
 
   def edit
-    @book = Book.find(params[:id])
+    @book = resource
   end
 
   def create
@@ -26,7 +26,8 @@ class BooksController < ApplicationController
   end
 
   def update
-    @book = Book.find(params[:id])
+    @book = resource
+
     if @book.update(book_params)
       redirect_to book_path(@book), notice: "Book was successfully updated."
     else
@@ -35,8 +36,10 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    @book = Book.find(params[:id])
+    @book = resource
+
     @book.destroy
+
     redirect_to books_path, notice: 'Book was successfully destroyed.',
       status: :see_other
   end
@@ -45,5 +48,13 @@ class BooksController < ApplicationController
 
     def book_params
       params.require(:book).permit(:title, :author, :isbn, :description)
+    end
+
+    def collection
+      Book.ordered
+    end
+
+    def resource
+      collection.find(params[:id])
     end
 end
