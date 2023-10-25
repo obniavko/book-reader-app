@@ -1,5 +1,5 @@
 class Book < ApplicationRecord
-  scope :ordered, -> { order(title: :asc) }
+  scope :ordered, -> { order(:title) }
 
   validates :title, presence: true, length: { maximum: 150 }
   validates :author, presence: true
