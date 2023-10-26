@@ -3,5 +3,6 @@
 
   <%= render "books/form", book: @book %>
 
+  <%= button_to "Destroy this book", book_path(@book), method: :delete, class: "btn btn-red" %>
   <%= link_to "Back to books", books_path, class: "btn btn-primary" %>
 </div>
