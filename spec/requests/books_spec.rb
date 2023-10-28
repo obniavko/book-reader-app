@@ -64,12 +64,10 @@ RSpec.describe BooksController, type: :request do
     context "with valid parameters" do
 
       it "updates the requested book and redirects to it" do
-        patch book_path(book), params: { book: new_params }
-        book.reload
-
-        new_params.each_pair do |key, value|
-          expect(book[key]).to eq(value)
-        end
+        expect do
+          patch book_path(book), params: { book: new_params }
+          book.reload
+        end.to change { book.title }.to("NewTitle")
 
         expect(response).to redirect_to(book_path(book))
       end
