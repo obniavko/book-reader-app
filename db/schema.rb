@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_12_202614) do
     t.string "title", null: false
     t.string "author", null: false
     t.string "isbn"
-    t.text "description", null: false
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

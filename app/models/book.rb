@@ -3,7 +3,7 @@ class Book < ApplicationRecord
   validates :author, presence: true
   validates :isbn, uniqueness: true, format: { with: /\A\d[\d-]*\d\z/,
     message: "only allows numbers and dashes" }
-  validates :description, presence: true, length: { maximum: 1000 }
+  validates :description, length: { maximum: 1000 }
 
   scope :ordered, -> { order(:title) }
 end
