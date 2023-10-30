@@ -3,12 +3,20 @@ require 'rails_helper'
 RSpec.describe Book, type: :model do
   it { is_expected.to validate_presence_of(:title) }
   it { is_expected.to validate_presence_of(:author) }
+
+  it { is_expected.to validate_length_of(:title).is_at_least(1) }
   it { is_expected.to validate_length_of(:title).is_at_most(150) }
+  it { is_expected.to validate_length_of(:author).is_at_least(1) }
+  it { is_expected.to validate_length_of(:author).is_at_most(50) }
   it { is_expected.to validate_length_of(:description).is_at_most(1000) }
-  it { is_expected.to allow_value("978-3-16-148410-0").for(:isbn) }
+
   it { is_expected.not_to allow_value("").for(:title) }
+  it { is_expected.not_to allow_value("a" * 151).for(:title) }
   it { is_expected.not_to allow_value("").for(:author) }
+  it { is_expected.not_to allow_value("a" * 51).for(:author) }
+  it { is_expected.not_to allow_value("a" * 1001).for(:description) }
   it { is_expected.not_to allow_value("isbn").for(:isbn) }
+  it { is_expected.to allow_value("978-3-16-148410-0").for(:isbn) }
 
   describe "uniqueness" do
     subject { FactoryBot.create(:book) }

@@ -11,6 +11,7 @@ RSpec.describe BooksController, type: :request do
       get books_path
 
       expect(response).to be_successful
+      expect(response.body).to include(book.title)
     end
   end
 
@@ -19,6 +20,7 @@ RSpec.describe BooksController, type: :request do
       get book_path(book)
 
       expect(response).to be_successful
+      expect(response.body).to include(book.title)
     end
   end
 
@@ -35,6 +37,7 @@ RSpec.describe BooksController, type: :request do
       get edit_book_path(book)
 
       expect(response).to be_successful
+      expect(response.body).to include(book.title)
     end
   end
 
@@ -45,7 +48,8 @@ RSpec.describe BooksController, type: :request do
           post books_path, params: { book: valid_params }
         end.to change(Book, :count).by(1)
 
-        expect(response).to redirect_to(book_path(Book.last))
+        expect(response).to be_redirect
+        expect(flash[:notice]).to eq("Book was successfully created.")
       end
     end
 
@@ -67,9 +71,10 @@ RSpec.describe BooksController, type: :request do
         expect do
           patch book_path(book), params: { book: new_params }
           book.reload
-        end.to change { book.title }.to("NewTitle")
+        end.to change { book.title }.to(new_params[:title])
 
         expect(response).to redirect_to(book_path(book))
+        expect(flash[:notice]).to eq("Book was successfully updated.")
       end
     end
 
@@ -87,6 +92,7 @@ RSpec.describe BooksController, type: :request do
     it "destroys the requested book and redirects to the books list" do
       expect { delete book_path(book) }.to change(Book, :count).by(-1)
       expect(response).to redirect_to(books_path)
+      expect(flash[:notice]).to eq("Book was successfully destroyed.")
     end
   end
 end
