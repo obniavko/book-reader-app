@@ -1,4 +1,5 @@
-@import './base.tailwind.css';
+@import './flash.tailwind.css';
+@import './form.tailwind.css';
 @import './buttons.tailwind.css';
 
 @tailwind base;
