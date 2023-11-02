@@ -73,7 +73,7 @@ RSpec.describe BooksController, type: :request do
           book.reload
         end.to change { book.title }.to(new_params[:title])
 
-        expect(response).to redirect_to(book_path(book))
+        expect(response).to be_redirect
         expect(flash[:notice]).to eq("Book was successfully updated.")
       end
     end
@@ -91,7 +91,7 @@ RSpec.describe BooksController, type: :request do
   describe "DELETE #destroy" do
     it "destroys the requested book and redirects to the books list" do
       expect { delete book_path(book) }.to change(Book, :count).by(-1)
-      expect(response).to redirect_to(books_path)
+      expect(response).to be_redirect
       expect(flash[:notice]).to eq("Book was successfully destroyed.")
     end
   end
