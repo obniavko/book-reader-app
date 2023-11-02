@@ -5,4 +5,12 @@ FactoryBot.define do
     isbn { Faker::Code.isbn(base: 13) }
     description { Faker::Lorem.paragraph }
   end
+
+  trait :empty_title do
+    title { "" }
+  end
+
+  trait :new_title do
+    title { "New Title" }
+  end
 end

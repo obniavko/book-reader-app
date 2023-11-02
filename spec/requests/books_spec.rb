@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe BooksController, type: :request do
-  let!(:book) { create :book }
-  let(:valid_params) { attributes_for(:book) }
-  let(:invalid_params) { { title: '' } }
-  let(:new_params) { { title: 'NewTitle' } }
+  let!(:book) { FactoryBot.create(:book) }
+  let(:valid_params) { FactoryBot.attributes_for(:book) }
+  let(:invalid_params) { FactoryBot.attributes_for(:book, :empty_title) }
+  let(:new_params) { FactoryBot.attributes_for(:book, :new_title) }
 
   describe "GET #index" do
     it "renders a successful response" do
@@ -57,7 +57,7 @@ RSpec.describe BooksController, type: :request do
       it "does not create a new Book and renders a response with 422 status" do
         expect do
           post books_path, params: { book: invalid_params }
-        end.to change(Book, :count).by(0)
+        end.not_to change(Book, :count)
 
         expect(response).to be_unprocessable
       end
