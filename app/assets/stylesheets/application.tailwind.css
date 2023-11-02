@@ -1,10 +1,10 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
 @import './flash.tailwind.css';
 @import './form.tailwind.css';
 @import './buttons.tailwind.css';
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 input[type=file]::-webkit-file-upload-button,
 input[type=file]::file-selector-button {
