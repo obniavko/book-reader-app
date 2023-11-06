@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe BooksController, type: :request do
-  let!(:user) { FactoryBot.create(:user) }
-  let(:valid_params) { FactoryBot.attributes_for(:user) }
-  let(:invalid_params) { FactoryBot.attributes_for(:user, password: "12345") }
+  let!(:user) { create(:user) }
+  let(:valid_params) { attributes_for(:user) }
+  let(:invalid_params) { attributes_for(:user, password: "12345") }
 
   describe "GET devise/registrations#new" do
     it "renders a successful response" do
