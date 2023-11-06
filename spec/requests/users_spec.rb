@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe BooksController, type: :request do
+RSpec.describe UsersController, type: :request do
   let!(:user) { create(:user) }
   let(:valid_params) { attributes_for(:user) }
   let(:invalid_params) { attributes_for(:user, password: "12345") }
