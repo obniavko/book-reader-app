@@ -1,4 +1,4 @@
-<div id="<%= dom_id book %>">
+<div id="<%= dom_id book %>" class="p-8 rounded-lg bg-slate-100 dark:bg-gray-800">
   <p class="my-5">
     <strong class="block mb-1 font-medium">Title:</strong>
     <%= book.title %>
@@ -16,9 +16,8 @@
 
   <p class="my-5">
     <strong class="block mb-1 font-medium">Description:</strong>
-    <%= book.description %>
+    <%= book.description.truncate(150) %>
   </p>
 
   <%= link_to "Show this book", book, class: "btn btn-primary" %>
-  <hr class="mt-6">
 </div>
