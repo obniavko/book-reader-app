@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe BooksController, type: :request do
-  let!(:book) { FactoryBot.create(:book) }
-  let(:valid_params) { FactoryBot.attributes_for(:book) }
-  let(:invalid_params) { FactoryBot.attributes_for(:book, :empty_title) }
-  let(:new_params) { FactoryBot.attributes_for(:book, :new_title) }
+  let!(:book) { create(:book) }
+  let(:valid_params) { attributes_for(:book) }
+  let(:invalid_params) { attributes_for(:book, :empty_title) }
+  let(:new_params) { attributes_for(:book, :new_title) }
 
   describe "GET #index" do
     it "renders a successful response" do
