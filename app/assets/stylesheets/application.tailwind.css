@@ -3,7 +3,7 @@
 @import "tailwindcss/utilities";
 
 @import './components/flash.css';
-@import './conponents/form.css';
+@import './components/form.css';
 @import './components/buttons.css';
 
 input[type=file]::-webkit-file-upload-button,
