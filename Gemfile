@@ -14,6 +14,7 @@ gem "jbuilder"
 gem "tailwindcss-rails", "~> 2.0"
 gem "rspec-rails"
 gem 'simple_form'
+gem 'active_storage_validations'
 gem "bootsnap", require: false
 
 group :development, :test do
