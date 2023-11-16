@@ -1,6 +1,6 @@
 class Book < ApplicationRecord
-  has_one_attached :cover
-  has_one_attached :content
+  has_one_attached :cover, dependent: :destroy
+  has_one_attached :content, dependent: :destroy
 
   validates :title, presence: true, length: { in: 1..150 }
   validates :author, presence: true, length: { in: 1..50 }
