@@ -15,22 +15,10 @@ FactoryBot.define do
   end
 
   trait :with_attached_cover do
-    after(:create) do |book|
-      book.cover.attach(
-        io: File.open(Rails.root.join("spec", "factories", "attachments", "cover_placeholder.png")),
-                      filename: "cover_placeholder.png",
-                      content_type: "image/png"
-      )
-    end
+    cover { Rack::Test::UploadedFile.new("spec/fixtures/cover_placeholder.png", "image/jpeg") }
   end
 
   trait :with_attached_content do
-    after(:create) do |book|
-      book.content.attach(
-        io: File.open(Rails.root.join("spec", "factories", "attachments", "Lorem_ipsum.pdf")),
-                      filename: "Lorem_ipsum.pdf",
-                      content_type: "application/pdf"
-      )
-    end
+    content { Rack::Test::UploadedFile.new("spec/fixtures/Lorem_ipsum.pdf", "application/pdf") }
   end
 end
