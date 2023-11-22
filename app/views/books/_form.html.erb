@@ -12,6 +12,12 @@
     <div class="my-5">
       <%= f.input :description %>
      </div>
+     <div class="my-5">
+      <%= f.input :cover, as: :file %>
+     </div>
+     <div class="my-5">
+      <%= f.input :content, as: :file %>
+     </div>
     <div class="my-5">
       <%= f.button :submit, class: "btn btn-green" %>
     </div>
