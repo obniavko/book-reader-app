@@ -15,10 +15,10 @@ FactoryBot.define do
   end
 
   trait :with_attached_cover do
-    cover { Rack::Test::UploadedFile.new("spec/fixtures/cover_placeholder.png", "image/jpeg") }
+    cover { Rack::Test::UploadedFile.new("spec/support/files/cover_placeholder.png", "image/jpeg") }
   end
 
   trait :with_attached_content do
-    content { Rack::Test::UploadedFile.new("spec/fixtures/Lorem_ipsum.pdf", "application/pdf") }
+    content { Rack::Test::UploadedFile.new("spec/support/files/Lorem_ipsum.pdf", "application/pdf") }
   end
 end
