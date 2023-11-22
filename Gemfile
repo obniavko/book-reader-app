@@ -16,6 +16,7 @@ gem "rspec-rails"
 gem 'simple_form'
 gem 'active_storage_validations'
 gem "devise", "~> 4.9"
+gem "chewy"
 gem "bootsnap", require: false
 
 group :development, :test do
