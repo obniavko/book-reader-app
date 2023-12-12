@@ -42,10 +42,27 @@ class BooksController < ApplicationController
       status: :see_other
   end
 
+  def search
+    if search_params[:query].present?
+      @books = BooksIndex.query(query_string: {fields: [:title, :author, :isbn],
+      query: search_params[:query], default_operator: 'and'}).records
+
+      flash.now[:notice] = @books.any? ? "Found #{@books.count} books" : "No books match your search."
+    else
+     flash.now[:notice] = "Please, enter your search parameters."
+    end
+
+   render :index
+  end
+
   private
 
     def book_params
       params.require(:book).permit(:title, :author, :isbn, :description, :cover, :content)
+    end
+
+    def search_params
+      params.require(:search).permit(:query)
     end
 
     def collection
