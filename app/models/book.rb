@@ -1,4 +1,6 @@
 class Book < ApplicationRecord
+  update_index('books') { self }
+
   has_one_attached :cover, dependent: :destroy
   has_one_attached :content, dependent: :destroy
 

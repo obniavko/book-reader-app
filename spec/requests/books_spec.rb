@@ -95,4 +95,58 @@ RSpec.describe BooksController, type: :request do
       expect(flash[:notice]).to eq("Book was successfully destroyed.")
     end
   end
+
+  describe "GET #search" do
+    context "when query is not blank and has correct values" do
+      before do
+        allow(BooksIndex).to receive_message_chain(:query, :records).and_return([book])
+        get search_books_path, params: { search: { query: "Title" } }
+      end
+
+      it "returns a successful response" do
+        expect(response).to be_successful
+      end
+
+      it "returns the books in the response body" do
+        expect(response.body).to include(book.title)
+      end
+
+      it "has a flash message for 1 book" do
+        expect(flash.now[:notice]).to eq("Found 1 books")
+      end
+    end
+
+    context "when query is not blank and has incorrect values" do
+      before do
+        allow(BooksIndex).to receive_message_chain(:query, :records).and_return([])
+        get search_books_path, params: { search: { query: "Unknown_title" } }
+      end
+
+      it "returns a successful response" do
+        expect(response).to be_successful
+      end
+
+      it "not return any books" do
+        expect(response.body).not_to include
+      end
+
+      it "gets a message that the book was not found" do
+        expect(flash.now[:notice]).to eq("No books match your search.")
+      end
+    end
+
+    context "when query is blank" do
+      before do
+        get search_books_path, params: { search: { query: " " } }
+      end
+
+      it "returns a successful response" do
+        expect(response).to be_successful
+      end
+
+      it "has a flash message" do
+        expect(flash.now[:notice]).to eq("Please, enter your search parameters.")
+      end
+    end
+  end
 end
