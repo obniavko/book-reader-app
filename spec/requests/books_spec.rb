@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe BooksController, type: :request do
-  let!(:book) { create(:book) }
+  include Devise::Test::IntegrationHelpers
+  let!(:book) { create(:book, :with_attached_content) }
+  let(:user) { create(:user) }
   let(:valid_params) { attributes_for(:book) }
   let(:invalid_params) { attributes_for(:book, :empty_title) }
   let(:new_params) { attributes_for(:book, :new_title) }
@@ -38,6 +40,26 @@ RSpec.describe BooksController, type: :request do
 
       expect(response).to be_successful
       expect(CGI.unescapeHTML(response.body)).to include(book.title)
+    end
+  end
+
+  describe "GET #read" do
+    context "user is signed in" do
+      it "renders a successful response" do
+        sign_in user
+        get read_book_path(book)
+
+        expect(response).to be_successful
+        expect(response.body).to include(book.content.filename.to_s)
+      end
+    end
+
+    context "user is not signed in" do
+      it "renders a successful response" do
+        get read_book_path(book)
+
+        expect(response.body).not_to include(book.content.filename.to_s)
+      end
     end
   end
 
