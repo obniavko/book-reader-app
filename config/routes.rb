@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   root "books#index"
 
-  resources :books
+  resources :books do
+    member do
+      get 'read'
+    end
+  end
 
   devise_for :users, skip: [:passwords, :sessions, :registrations]
 
