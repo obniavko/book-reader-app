@@ -11,6 +11,10 @@ class BooksController < ApplicationController
     @book = Book.new
   end
 
+  def read
+    @book = resource
+  end
+
   def edit
     @book = resource
   end
