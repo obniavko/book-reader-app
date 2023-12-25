@@ -1,0 +1,19 @@
+<div>
+  <div>
+    <p class="my-5">
+      <strong><%= @book.title %></strong>
+    </p>
+    <%= link_to "Back to book", book_path(@book), class: "btn btn-primary" %>
+  </div>
+  <br>
+  <div>
+    <% if user_signed_in? && @book.content.attached? %>
+      <div id="pdf" style="height: 1000px;"></div>
+      <div data-controller="pdf"
+        data-pdf-url="<%= rails_blob_path(@book.content, only_path: true) %>"
+        data-pdf-filename="<%= @book.content.filename %>">
+      </div>
+      <script src="https://acrobatservices.adobe.com/view-sdk/viewer.js"></script>
+    <% end %>
+  </div>
+</div>
